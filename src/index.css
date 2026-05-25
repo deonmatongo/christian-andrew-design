@@ -326,7 +326,7 @@ nav {
 .marquee-track {
   display: flex;
   gap: 3rem;
-  animation: scroll 18s linear infinite;
+  animation: scroll 12s linear infinite;
   white-space: nowrap;
   font-family: 'Archivo Black', sans-serif;
   font-size: 1.75rem;
