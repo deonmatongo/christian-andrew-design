@@ -5,48 +5,49 @@ export default function Hero() {
         <div className="hero-overlay" />
       </div>
 
-      <div className="hero-content-left">
-        <div className="hero-meta">
-          <div>LICENSED &amp; INSURED · ACCEPTING NEW PROJECTS</div>
-          <div>RESIDENTIAL · COMMERCIAL · INDUSTRIAL · CIVIL</div>
+      <div className="hero-content">
+        <div className="hero-eyebrow">
+          <span className="hero-dot" />
+          Licensed &amp; Insured &nbsp;·&nbsp; Accepting New Projects
+          <span className="hero-dot" />
         </div>
+
         <h1>
-          Designed,<br />
-          <span className="outlined">engineered</span><br />
-          <span className="accent">&amp; built</span><br />
-          to last.
+          We build<br />
+          <em className="hero-accent">what lasts.</em>
         </h1>
-      </div>
 
-      <div className="hero-side">
-        <p>
-          Christian Andrew Construction &amp; Design is a full-service construction firm delivering
-          residential, commercial, and industrial builds — from initial design through final handover,
-          every project personally managed to completion.
+        <p className="hero-desc">
+          Full-service construction from initial design through final handover —
+          residential, commercial, and industrial builds personally managed at every stage.
         </p>
-        <div className="hero-disciplines">
-          <div className="discipline-tag">
-            <div className="discipline-tag-name">Residential<br />Construction</div>
-            <div className="discipline-tag-label">Custom Homes ·<br />New Builds · Extensions</div>
-          </div>
-          <div className="discipline-tag">
-            <div className="discipline-tag-name">Commercial<br />Builds</div>
-            <div className="discipline-tag-label">Office · Retail ·<br />Warehouse · Fit-Out</div>
-          </div>
-          <div className="discipline-tag">
-            <div className="discipline-tag-name">Industrial<br />&amp; Civil</div>
-            <div className="discipline-tag-label">Infrastructure ·<br />Heavy Structures</div>
-          </div>
-          <div className="discipline-tag">
-            <div className="discipline-tag-name">Design &amp;<br />Engineering</div>
-            <div className="discipline-tag-label">Structural ·<br />Planning · Permits</div>
-          </div>
+
+        <div className="hero-cta">
+          <a href="#projects" className="btn-hero-primary">View Our Portfolio →</a>
+          <a href="#calculator" className="btn-hero-secondary">Get a Free Estimate</a>
         </div>
       </div>
 
-      <div className="hero-tag-bottom">
-        <div>[ DESIGNED · ENGINEERED · BUILT ]</div>
-        <div className="scroll-indicator">SCROLL <span></span></div>
+      <div className="hero-stats">
+        <div className="hero-stat">
+          <div className="hero-stat-num">150+</div>
+          <div className="hero-stat-label">Projects Delivered</div>
+        </div>
+        <div className="hero-stat-divider" />
+        <div className="hero-stat">
+          <div className="hero-stat-num">25</div>
+          <div className="hero-stat-label">Years Experience</div>
+        </div>
+        <div className="hero-stat-divider" />
+        <div className="hero-stat">
+          <div className="hero-stat-num">$50M+</div>
+          <div className="hero-stat-label">Built Value</div>
+        </div>
+        <div className="hero-stat-divider" />
+        <div className="hero-stat">
+          <div className="hero-stat-num">100%</div>
+          <div className="hero-stat-label">On-Time Delivery</div>
+        </div>
       </div>
     </section>
   )
