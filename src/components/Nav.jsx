@@ -26,10 +26,9 @@ export default function Nav() {
 
       <ul className={`nav-links${menuOpen ? ' nav-links--open' : ''}`}>
         <li><a href="#home" onClick={close}>Home</a></li>
-        <li><a href="#projects" onClick={close}>Projects</a></li>
-        <li><a href="#about" onClick={close}>About</a></li>
+        <li><a href="#projects" onClick={close}>Portfolio</a></li>
         <li><a href="#services" onClick={close}>Services</a></li>
-        <li><a href="#clients" onClick={close}>Clients</a></li>
+        <li><a href="#about" onClick={close}>About</a></li>
         <li><a href="#contact" onClick={close}>Contact</a></li>
       </ul>
 

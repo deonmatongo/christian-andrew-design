@@ -1,34 +1,41 @@
+const IMG = 'https://images.unsplash.com'
+
 const categories = [
   {
     num: 'Category 01',
-    type: 'Built Work',
-    title: 'Architecture & Engineering',
-    sub: '— Residential · Commercial · Industrial',
+    type: 'New Builds',
+    title: 'Residential Construction',
+    sub: '— Custom Homes · Extensions · Subdivisions',
     featured: true,
+    img: `${IMG}/photo-1558618666-fcd25c85cd64?w=800&q=70&auto=format&fit=crop`,
   },
   {
     num: 'Category 02',
-    type: 'Public Works',
-    title: 'Monuments',
-    sub: '— Public & Commemorative',
+    type: 'Commercial',
+    title: 'Commercial Builds',
+    sub: '— Office · Retail · Mixed-Use',
+    img: `${IMG}/photo-1487958449943-2429e8be8625?w=600&q=70&auto=format&fit=crop`,
   },
   {
     num: 'Category 03',
-    type: 'Studio',
-    title: 'Sculpture',
-    sub: '— Commissioned & Self‑Directed',
+    type: 'Heavy Works',
+    title: 'Industrial &amp; Civil',
+    sub: '— Warehouses · Infrastructure · Bridges',
+    img: `${IMG}/photo-1431576901776-e539bd916ba2?w=600&q=70&auto=format&fit=crop`,
   },
   {
     num: 'Category 04',
-    type: 'Editions',
-    title: 'Art‑O‑Mat House In A Box',
-    sub: '— Vendable Art Pieces',
+    type: 'Restoration',
+    title: 'Renovation &amp; Fit-Out',
+    sub: '— Heritage · Interiors · Structural Repair',
+    img: `${IMG}/photo-1503387762-592deb58ef4e?w=600&q=70&auto=format&fit=crop`,
   },
   {
     num: 'Category 05',
-    type: 'Visual',
-    title: 'Graphic Design',
-    sub: '— Identity · Print · Exhibition',
+    type: 'Pre-Build',
+    title: 'Design &amp; Engineering',
+    sub: '— Structural Plans · Permits · PM',
+    img: `${IMG}/photo-1541888946425-d81bb19240f5?w=600&q=70&auto=format&fit=crop`,
   },
 ]
 
@@ -37,25 +44,31 @@ export default function Projects() {
     <section className="projects reveal" id="projects">
       <div className="section-head">
         <div>
-          <div className="section-num" style={{ color: 'var(--safety)' }}>02 — Project Archive</div>
+          <div className="section-num" style={{ color: 'var(--safety)' }}>02 — Portfolio</div>
           <h2>The full<br /><em>catalogue.</em></h2>
         </div>
         <p className="section-intro">
-          A growing archive across every discipline the studio touches — built work and commissions,
-          public and private, large and small. New pieces are being added regularly as the Projects
-          section is rebuilt.
+          A growing portfolio of built work across every sector — residential to industrial,
+          bespoke homes to large-scale commercial developments. New completions are documented
+          regularly as projects reach handover.
         </p>
       </div>
+
       <div className="project-grid">
         {categories.map((cat) => (
-          <a href="#" className="project" key={cat.num}>
+          <a
+            href="#"
+            className="project"
+            key={cat.num}
+            style={{ backgroundImage: `url(${cat.img})` }}
+          >
             {cat.featured && <div className="project-tag">FEATURED</div>}
             <div className="project-meta">
               <span>{cat.num}</span>
               <span>{cat.type}</span>
             </div>
             <div>
-              <div className="project-title">{cat.title}</div>
+              <div className="project-title" dangerouslySetInnerHTML={{ __html: cat.title }} />
               <div className="project-sub">{cat.sub}</div>
             </div>
           </a>

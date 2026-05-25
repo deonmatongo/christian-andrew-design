@@ -35,11 +35,11 @@ export default function CTA() {
       <div className="cta-inner">
         <div className="cta-left">
           <div className="section-num">04 — Begin Here</div>
-          <h2>Have a project?<br /><em>Let&#8217;s talk.</em></h2>
+          <h2>Have a project?<br /><em>Let&#8217;s build.</em></h2>
           <p>
-            Whether it&#8217;s a residential renovation, a commissioned sculpture, a monument
-            installation, or an Art&#8209;O&#8209;Mat edition — send a note. Every inquiry
-            receives a personal reply.
+            Whether it&#8217;s a custom home, a commercial development, a large-scale industrial
+            facility, or a structural renovation — send a note. Every inquiry receives a personal
+            reply from the principal.
           </p>
           <div className="cta-buttons">
             <a href="#" className="btn-secondary">View Résumé</a>
@@ -98,13 +98,14 @@ export default function CTA() {
                   onChange={handleChange}
                   required
                 >
-                  <option value="" disabled>Select a discipline</option>
-                  <option value="Architecture & Engineering">Architecture &amp; Engineering</option>
-                  <option value="Monuments">Monuments</option>
-                  <option value="Sculpture">Sculpture</option>
-                  <option value="Art-O-Mat Edition">Art&#8209;O&#8209;Mat Edition</option>
-                  <option value="Graphic Design">Graphic Design</option>
-                  <option value="Other">Other</option>
+                  <option value="" disabled>Select a project type</option>
+                  <option value="Residential New Build">Residential New Build</option>
+                  <option value="Home Extension or Renovation">Home Extension or Renovation</option>
+                  <option value="Commercial Build">Commercial Build</option>
+                  <option value="Industrial or Warehouse">Industrial or Warehouse</option>
+                  <option value="Civil or Infrastructure">Civil or Infrastructure</option>
+                  <option value="Design & Engineering Only">Design &amp; Engineering Only</option>
+                  <option value="Other">Other / Not Sure Yet</option>
                 </select>
               </div>
 

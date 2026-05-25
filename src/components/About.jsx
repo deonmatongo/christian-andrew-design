@@ -4,30 +4,31 @@ export default function About() {
       <div className="about-grid">
         <div>
           <div className="section-num">03 — About</div>
-          <h2>
-            Welcome<br />to the<br /><em>studio.</em>
-          </h2>
+          <h2>Built on<br />craft &amp;<br /><em>experience.</em></h2>
         </div>
         <div>
           <div className="about-body">
             <p>
-              Welcome to the official website for Christian Andrew Design. I am currently working on a
-              little restructure of this old thing, so pardon the dust and check back regularly as I
-              will be adding many of my various works to my new Projects section.
+              Christian Andrew Construction &amp; Design is a full-service construction firm with
+              hands-on experience across residential, commercial, and industrial sectors. From a
+              single custom home to a multi-storey commercial complex, every project is personally
+              managed from first consultation through to final handover.
             </p>
             <p>
-              That archive will include my residential, commercial, and industrial architectural and
-              engineering works, monuments, sculptures, Art&#8209;O&#8209;Mat retro vending machine Modern
-              House in a Box vendable art pieces, graphic design works, and much more.
+              Our process starts where quality starts — with precise design and structural
+              engineering before a single foundation is poured. We coordinate every trade,
+              manage all permits and inspections, and maintain clear communication with clients
+              at every stage of the build.
             </p>
             <p>
-              Thank you for your interest. Contact me for consultation — and potential employers can
-              view my résumé below.
+              We are currently accepting new build commissions and renovation projects. Contact
+              us to discuss your scope — and developers or general contractors can request our
+              full capability statement and project portfolio below.
             </p>
           </div>
           <div className="about-actions">
-            <a href="#contact" className="btn-primary">Contact Me →</a>
-            <a href="#" className="btn-secondary">View Résumé</a>
+            <a href="#contact" className="btn-primary">Start a Project →</a>
+            <a href="#" className="btn-secondary">View Portfolio</a>
           </div>
         </div>
       </div>

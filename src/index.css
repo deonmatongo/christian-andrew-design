@@ -146,19 +146,21 @@ nav {
   color: var(--bone);
 }
 
-/* Video layer */
+/* Background image with Ken Burns slow zoom */
 .hero-bg {
   position: absolute;
   inset: 0;
-  overflow: hidden;
   z-index: 0;
+  background: url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1920&q=80&auto=format&fit=crop') center/cover no-repeat;
+  animation: kenBurns 22s ease-in-out infinite alternate;
+  will-change: transform;
 }
-.hero-video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
+
+@keyframes kenBurns {
+  0%   { transform: scale(1)    translate(0, 0); }
+  100% { transform: scale(1.08) translate(-1.5%, -1%); }
 }
+
 .hero-overlay {
   position: absolute;
   inset: 0;
@@ -361,9 +363,9 @@ nav {
 .post-list { border-top: 2px solid var(--steel); }
 .post-item {
   display: grid;
-  grid-template-columns: 80px 1fr 2fr 120px;
+  grid-template-columns: 90px 1fr 2fr 120px;
   gap: 2rem;
-  padding: 2.5rem 0;
+  padding: 1.5rem 0;
   border-bottom: 1px solid var(--steel);
   align-items: center;
   transition: background 0.3s, padding 0.3s, color 0.3s;
@@ -378,12 +380,28 @@ nav {
   padding-right: 1rem;
 }
 .post-item:hover .post-num,
-.post-item:hover .post-cta { color: var(--safety); }
+.post-item:hover .post-cta { color: var(--safety); background: transparent; }
+
+/* Post thumbnail with number badge */
+.post-thumb {
+  width: 90px;
+  height: 72px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  flex-shrink: 0;
+}
 .post-num {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: var(--rust);
+  color: var(--bone);
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.85rem;
-  color: var(--rust);
+  font-size: 0.65rem;
   letter-spacing: 0.1em;
+  padding: 2px 6px;
+  transition: background 0.3s, color 0.3s;
 }
 .post-title {
   font-family: 'Archivo Black', sans-serif;
@@ -464,27 +482,28 @@ nav {
   color: inherit;
 }
 .project:hover { transform: translateY(-6px); border-color: var(--rust); }
+/* Project images are set via inline style; gradients overlay them */
+.project { background-size: cover !important; background-position: center !important; }
 .project:nth-child(1) {
   grid-row: span 2;
-  background:
-    linear-gradient(135deg, rgba(196,70,23,0.85) 0%, rgba(139,47,13,0.95) 100%),
-    repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(0,0,0,0.1) 20px, rgba(0,0,0,0.1) 22px);
+  background-image:
+    linear-gradient(135deg, rgba(196,70,23,0.82) 0%, rgba(139,47,13,0.92) 100%) !important;
 }
 .project:nth-child(2) {
-  background:
-    linear-gradient(180deg, rgba(217,212,204,0.05) 0%, rgba(0,0,0,0.4) 100%),
-    var(--steel-soft);
+  background-image:
+    linear-gradient(180deg, rgba(26,26,26,0.45) 0%, rgba(26,26,26,0.78) 100%) !important;
 }
 .project:nth-child(3) {
-  background:
-    linear-gradient(180deg, rgba(244,196,48,0.2) 0%, rgba(0,0,0,0.4) 100%),
-    var(--steel-soft);
+  background-image:
+    linear-gradient(180deg, rgba(26,26,26,0.35) 0%, rgba(26,26,26,0.75) 100%) !important;
 }
-.project:nth-child(4) { background: linear-gradient(135deg, var(--steel-soft) 0%, #0d0d0d 100%); }
+.project:nth-child(4) {
+  background-image:
+    linear-gradient(180deg, rgba(26,26,26,0.5) 0%, rgba(13,13,13,0.85) 100%) !important;
+}
 .project:nth-child(5) {
-  background:
-    linear-gradient(135deg, rgba(217,212,204,0.15), rgba(0,0,0,0.3)),
-    var(--steel-soft);
+  background-image:
+    linear-gradient(135deg, rgba(26,26,26,0.55), rgba(26,26,26,0.8)) !important;
 }
 .project-meta {
   display: flex;
@@ -921,10 +940,11 @@ footer {
 
   /* Latest work */
   .post-item {
-    grid-template-columns: 50px 1fr;
+    grid-template-columns: 72px 1fr;
     gap: 1rem;
-    padding: 1.75rem 0;
+    padding: 1.25rem 0;
   }
+  .post-thumb { width: 72px; height: 60px; }
   .post-desc {
     grid-column: 1 / -1;
     padding-left: 0;
@@ -977,7 +997,8 @@ footer {
   .section-head { margin-bottom: 3rem; }
 
   /* Latest work */
-  .post-item { grid-template-columns: 40px 1fr; gap: 0.75rem; padding: 1.5rem 0; }
+  .post-item { grid-template-columns: 60px 1fr; gap: 0.75rem; padding: 1.25rem 0; }
+  .post-thumb { width: 60px; height: 50px; }
   .post-title { font-size: 1rem; }
   .post-desc { font-size: 0.9rem; }
 
