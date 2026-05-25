@@ -482,29 +482,7 @@ nav {
   color: inherit;
 }
 .project:hover { transform: translateY(-6px); border-color: var(--rust); }
-/* Project images are set via inline style; gradients overlay them */
-.project { background-size: cover !important; background-position: center !important; }
-.project:nth-child(1) {
-  grid-row: span 2;
-  background-image:
-    linear-gradient(135deg, rgba(196,70,23,0.82) 0%, rgba(139,47,13,0.92) 100%) !important;
-}
-.project:nth-child(2) {
-  background-image:
-    linear-gradient(180deg, rgba(26,26,26,0.45) 0%, rgba(26,26,26,0.78) 100%) !important;
-}
-.project:nth-child(3) {
-  background-image:
-    linear-gradient(180deg, rgba(26,26,26,0.35) 0%, rgba(26,26,26,0.75) 100%) !important;
-}
-.project:nth-child(4) {
-  background-image:
-    linear-gradient(180deg, rgba(26,26,26,0.5) 0%, rgba(13,13,13,0.85) 100%) !important;
-}
-.project:nth-child(5) {
-  background-image:
-    linear-gradient(135deg, rgba(26,26,26,0.55), rgba(26,26,26,0.8)) !important;
-}
+.project:nth-child(1) { grid-row: span 2; }
 .project-meta {
   display: flex;
   justify-content: space-between;

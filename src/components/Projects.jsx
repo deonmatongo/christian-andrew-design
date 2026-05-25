@@ -7,35 +7,40 @@ const categories = [
     title: 'Residential Construction',
     sub: '— Custom Homes · Extensions · Subdivisions',
     featured: true,
-    img: `${IMG}/photo-1558618666-fcd25c85cd64?w=800&q=70&auto=format&fit=crop`,
+    img: `${IMG}/photo-1558618666-fcd25c85cd64?w=800&q=75&auto=format&fit=crop`,
+    overlay: 'linear-gradient(135deg, rgba(196,70,23,0.70) 0%, rgba(139,47,13,0.86) 100%)',
   },
   {
     num: 'Category 02',
     type: 'Commercial',
     title: 'Commercial Builds',
     sub: '— Office · Retail · Mixed-Use',
-    img: `${IMG}/photo-1487958449943-2429e8be8625?w=600&q=70&auto=format&fit=crop`,
+    img: `${IMG}/photo-1487958449943-2429e8be8625?w=600&q=75&auto=format&fit=crop`,
+    overlay: 'linear-gradient(160deg, rgba(26,26,26,0.30) 0%, rgba(26,26,26,0.70) 100%)',
   },
   {
     num: 'Category 03',
     type: 'Heavy Works',
-    title: 'Industrial &amp; Civil',
+    title: 'Industrial & Civil',
     sub: '— Warehouses · Infrastructure · Bridges',
-    img: `${IMG}/photo-1431576901776-e539bd916ba2?w=600&q=70&auto=format&fit=crop`,
+    img: `${IMG}/photo-1431576901776-e539bd916ba2?w=600&q=75&auto=format&fit=crop`,
+    overlay: 'linear-gradient(160deg, rgba(26,26,26,0.25) 0%, rgba(26,26,26,0.68) 100%)',
   },
   {
     num: 'Category 04',
     type: 'Restoration',
-    title: 'Renovation &amp; Fit-Out',
+    title: 'Renovation & Fit-Out',
     sub: '— Heritage · Interiors · Structural Repair',
-    img: `${IMG}/photo-1503387762-592deb58ef4e?w=600&q=70&auto=format&fit=crop`,
+    img: `${IMG}/photo-1503387762-592deb58ef4e?w=600&q=75&auto=format&fit=crop`,
+    overlay: 'linear-gradient(160deg, rgba(26,26,26,0.38) 0%, rgba(13,13,13,0.76) 100%)',
   },
   {
     num: 'Category 05',
     type: 'Pre-Build',
-    title: 'Design &amp; Engineering',
+    title: 'Design & Engineering',
     sub: '— Structural Plans · Permits · PM',
-    img: `${IMG}/photo-1541888946425-d81bb19240f5?w=600&q=70&auto=format&fit=crop`,
+    img: `${IMG}/photo-1541888946425-d81bb19240f5?w=600&q=75&auto=format&fit=crop`,
+    overlay: 'linear-gradient(135deg, rgba(26,26,26,0.42) 0%, rgba(26,26,26,0.74) 100%)',
   },
 ]
 
@@ -60,7 +65,11 @@ export default function Projects() {
             href="#"
             className="project"
             key={cat.num}
-            style={{ backgroundImage: `url(${cat.img})` }}
+            style={{
+              backgroundImage: `${cat.overlay}, url(${cat.img})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+            }}
           >
             {cat.featured && <div className="project-tag">FEATURED</div>}
             <div className="project-meta">
@@ -68,7 +77,7 @@ export default function Projects() {
               <span>{cat.type}</span>
             </div>
             <div>
-              <div className="project-title" dangerouslySetInnerHTML={{ __html: cat.title }} />
+              <div className="project-title">{cat.title}</div>
               <div className="project-sub">{cat.sub}</div>
             </div>
           </a>
