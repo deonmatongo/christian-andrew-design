@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Christian Andrew Design — Architecture, Sculpture & Design</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Bebas+Neue&family=JetBrains+Mono:wght@400;500;700&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --concrete: #d9d4cc;
+    --concrete-dark: #b8b0a3;
+    --steel: #1a1a1a;
+    --steel-soft: #2a2a2a;
+    --rust: #c44617;
+    --rust-deep: #8b2f0d;
+    --safety: #f4c430;
+    --bone: #efeae0;
+    --shadow: rgba(0, 0, 0, 0.4);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bone);
+    color: var(--steel);
+    font-family: 'Fraunces', Georgia, serif;
+    line-height: 1.5;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* Noise overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
+    pointer-events: none;
+    opacity: 0.12;
+    z-index: 1000;
+    mix-blend-mode: multiply;
+  }
+
+  /* === NAV === */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1.25rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(239, 234, 224, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--steel);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .logo {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 1.25rem;
+    letter-spacing: 0.02em;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .logo-mark {
+    width: 14px; height: 14px;
+    background: var(--rust);
+    transform: rotate(45deg);
+  }
+  .nav-links {
+    display: flex; gap: 2.25rem;
+    list-style: none;
+  }
+  .nav-links a {
+    color: var(--steel);
+    text-decoration: none;
+    font-weight: 500;
+    position: relative;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--rust); }
+  .nav-cta {
+    background: var(--steel);
+    color: var(--bone);
+    padding: 0.7rem 1.4rem;
+    border: none;
+    font-family: inherit;
+    font-size: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+    cursor: pointer;
+    transition: background 0.2s;
+    text-decoration: none;
+  }
+  .nav-cta:hover { background: var(--rust); }
+
+  /* === HERO === */
+  .hero {
+    min-height: 100vh;
+    padding: 8rem 2rem 4rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: end;
+    position: relative;
+    background:
+      linear-gradient(to bottom, transparent 0%, transparent 70%, var(--bone) 100%),
+      radial-gradient(ellipse at top right, var(--concrete) 0%, var(--bone) 60%);
+  }
+
+  .hero-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--steel-soft);
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin-bottom: 2rem;
+    border-left: 2px solid var(--rust);
+    padding-left: 1rem;
+  }
+
+  .hero h1 {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: clamp(4rem, 11vw, 11rem);
+    line-height: 0.85;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+  }
+  .hero h1 .accent {
+    color: var(--rust);
+    font-style: italic;
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 0.85em;
+    text-transform: lowercase;
+    letter-spacing: -0.02em;
+  }
+  .hero h1 .outlined {
+    -webkit-text-stroke: 2px var(--steel);
+    color: transparent;
+  }
+
+  .hero-side {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding-bottom: 1rem;
+  }
+  .hero-side p {
+    font-size: 1.15rem;
+    line-height: 1.6;
+    max-width: 36ch;
+    color: var(--steel-soft);
+  }
+  .hero-disciplines {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--steel);
+  }
+  .discipline-tag {
+    display: flex;
+    flex-direction: column;
+  }
+  .discipline-tag-name {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 1.1rem;
+    line-height: 1.1;
+    color: var(--steel);
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+  }
+  .discipline-tag-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--steel-soft);
+    margin-top: 0.4rem;
+  }
+
+  .hero-tag-bottom {
+    position: absolute;
+    bottom: 2rem;
+    left: 2rem;
+    right: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--steel-soft);
+  }
+  .scroll-indicator {
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .scroll-indicator span {
+    width: 30px; height: 1px;
+    background: var(--steel);
+    display: inline-block;
+    animation: pulseLine 2s ease-in-out infinite;
+  }
+
+  @keyframes pulseLine {
+    0%, 100% { transform: scaleX(1); opacity: 1; }
+    50% { transform: scaleX(0.4); opacity: 0.5; }
+  }
+
+  /* === MARQUEE === */
+  .marquee {
+    background: var(--steel);
+    color: var(--bone);
+    padding: 1.25rem 0;
+    overflow: hidden;
+    border-top: 1px solid var(--steel);
+    border-bottom: 1px solid var(--steel);
+  }
+  .marquee-track {
+    display: flex;
+    gap: 3rem;
+    animation: scroll 30s linear infinite;
+    white-space: nowrap;
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 1.75rem;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+  }
+  .marquee-track span {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+  }
+  .marquee-dot {
+    width: 12px; height: 12px;
+    background: var(--rust);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  @keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* === LATEST POSTS (services slot) === */
+  .services {
+    padding: 8rem 2rem;
+    background: var(--bone);
+  }
+  .section-head {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 4rem;
+    margin-bottom: 5rem;
+    align-items: end;
+  }
+  .section-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 1rem;
+  }
+  .section-head h2 {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: clamp(3rem, 7vw, 6rem);
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+  }
+  .section-head h2 em {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--rust);
+    font-size: 0.7em;
+    text-transform: lowercase;
+  }
+  .section-intro {
+    font-size: 1.1rem;
+    color: var(--steel-soft);
+    line-height: 1.6;
+    max-width: 55ch;
+  }
+
+  .post-list {
+    border-top: 2px solid var(--steel);
+  }
+  .post-item {
+    display: grid;
+    grid-template-columns: 80px 1fr 2fr 120px;
+    gap: 2rem;
+    padding: 2.5rem 0;
+    border-bottom: 1px solid var(--steel);
+    align-items: center;
+    transition: background 0.3s, padding 0.3s, color 0.3s;
+    cursor: pointer;
+    position: relative;
+    text-decoration: none;
+    color: inherit;
+  }
+  .post-item:hover {
+    background: var(--steel);
+    color: var(--bone);
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .post-item:hover .post-num,
+  .post-item:hover .post-cta {
+    color: var(--safety);
+  }
+  .post-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--rust);
+    letter-spacing: 0.1em;
+  }
+  .post-title {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: clamp(1.35rem, 2.4vw, 2rem);
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .post-desc {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    opacity: 0.85;
+  }
+  .post-cta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-align: right;
+    color: var(--rust);
+    transition: transform 0.3s, color 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.4rem;
+  }
+  .post-item:hover .post-cta {
+    transform: translateX(8px);
+  }
+
+  /* === PROJECTS (categories) === */
+  .projects {
+    background: var(--steel);
+    color: var(--bone);
+    padding: 8rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .projects::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 400px; height: 400px;
+    border: 1px solid var(--steel-soft);
+    transform: rotate(45deg);
+  }
+  .projects::after {
+    content: '';
+    position: absolute;
+    bottom: -150px; left: -150px;
+    width: 500px; height: 500px;
+    border: 1px solid var(--steel-soft);
+    transform: rotate(45deg);
+  }
+  .projects .section-head h2 {
+    color: var(--bone);
+  }
+  .projects .section-intro {
+    color: var(--concrete-dark);
+  }
+
+  .project-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: 400px 300px;
+    gap: 1.5rem;
+    position: relative;
+    z-index: 2;
+  }
+  .project {
+    background: var(--steel-soft);
+    border: 1px solid #333;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.4s, border-color 0.4s;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+  }
+  .project:hover {
+    transform: translateY(-6px);
+    border-color: var(--rust);
+  }
+  .project:nth-child(1) {
+    grid-row: span 2;
+    background:
+      linear-gradient(135deg, rgba(196, 70, 23, 0.85) 0%, rgba(139, 47, 13, 0.95) 100%),
+      repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(0,0,0,0.1) 20px, rgba(0,0,0,0.1) 22px);
+  }
+  .project:nth-child(2) {
+    background:
+      linear-gradient(180deg, rgba(217, 212, 204, 0.05) 0%, rgba(0,0,0,0.4) 100%),
+      var(--steel-soft);
+  }
+  .project:nth-child(3) {
+    background:
+      linear-gradient(180deg, rgba(244, 196, 48, 0.2) 0%, rgba(0,0,0,0.4) 100%),
+      var(--steel-soft);
+  }
+  .project:nth-child(4) {
+    background:
+      linear-gradient(135deg, var(--steel-soft) 0%, #0d0d0d 100%);
+  }
+  .project:nth-child(5) {
+    background:
+      linear-gradient(135deg, rgba(217, 212, 204, 0.15), rgba(0,0,0,0.3)),
+      var(--steel-soft);
+  }
+  .project-meta {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+  .project-title {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: clamp(1.5rem, 2.8vw, 2.4rem);
+    text-transform: uppercase;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+  }
+  .project-sub {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 1rem;
+    margin-top: 0.5rem;
+    opacity: 0.8;
+  }
+  .project-tag {
+    position: absolute;
+    top: 1.5rem; right: 1.5rem;
+    background: var(--safety);
+    color: var(--steel);
+    padding: 0.3rem 0.7rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  /* === ABOUT === */
+  .about-section {
+    padding: 8rem 2rem;
+    background: var(--concrete);
+    position: relative;
+  }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 5rem;
+    align-items: start;
+  }
+  .about-section .section-num { color: var(--rust); }
+  .about-section h2 {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+  }
+  .about-section h2 em {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--rust);
+    font-size: 0.7em;
+    text-transform: lowercase;
+  }
+  .about-body {
+    font-size: 1.1rem;
+    line-height: 1.75;
+    color: var(--steel-soft);
+  }
+  .about-body p { margin-bottom: 1.5rem; }
+  .about-body p:first-child::first-letter {
+    font-family: 'Archivo Black', sans-serif;
+    float: left;
+    font-size: 4.5rem;
+    line-height: 0.85;
+    padding: 0.4rem 0.7rem 0 0;
+    color: var(--rust);
+  }
+  .about-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+  }
+
+  /* === CTA === */
+  .cta-section {
+    padding: 8rem 2rem;
+    background: var(--rust);
+    color: var(--bone);
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-section::before {
+    content: 'BUILD';
+    position: absolute;
+    bottom: -50px;
+    right: -20px;
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 22rem;
+    line-height: 1;
+    color: var(--rust-deep);
+    opacity: 0.4;
+    pointer-events: none;
+    letter-spacing: -0.05em;
+  }
+  .cta-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+  }
+  .cta-section .section-num { color: var(--safety); }
+  .cta-section h2 {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: clamp(3rem, 7vw, 6rem);
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+  }
+  .cta-section h2 em {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-style: italic;
+    text-transform: lowercase;
+    font-size: 0.75em;
+  }
+  .cta-section p {
+    font-size: 1.2rem;
+    max-width: 52ch;
+    margin-bottom: 3rem;
+    line-height: 1.6;
+  }
+  .cta-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .btn-primary, .btn-secondary {
+    padding: 1.2rem 2.5rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .btn-primary {
+    background: var(--steel);
+    color: var(--bone);
+  }
+  .btn-primary:hover {
+    background: var(--bone);
+    color: var(--steel);
+  }
+  .btn-secondary {
+    background: transparent;
+    color: var(--bone);
+    border: 2px solid var(--bone);
+  }
+  .btn-secondary:hover {
+    background: var(--bone);
+    color: var(--rust);
+  }
+  /* About-section button variants on light bg */
+  .about-actions .btn-primary {
+    background: var(--steel);
+    color: var(--bone);
+  }
+  .about-actions .btn-primary:hover {
+    background: var(--rust);
+    color: var(--bone);
+  }
+  .about-actions .btn-secondary {
+    background: transparent;
+    color: var(--steel);
+    border: 2px solid var(--steel);
+  }
+  .about-actions .btn-secondary:hover {
+    background: var(--steel);
+    color: var(--bone);
+  }
+
+  /* === FOOTER === */
+  footer {
+    background: var(--steel);
+    color: var(--bone);
+    padding: 5rem 2rem 2rem;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem;
+    padding-bottom: 4rem;
+    border-bottom: 1px solid var(--steel-soft);
+  }
+  .footer-brand .logo {
+    color: var(--bone);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .footer-brand p {
+    color: var(--concrete-dark);
+    line-height: 1.6;
+    max-width: 38ch;
+    margin-bottom: 2rem;
+  }
+  .footer-col h4 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 1.5rem;
+  }
+  .footer-col ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  .footer-col a {
+    color: var(--bone);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+  }
+  .footer-col a:hover { color: var(--safety); }
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 2rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--concrete-dark);
+  }
+  .cert-badges {
+    display: flex; gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .cert-badge {
+    padding: 0.4rem 0.8rem;
+    border: 1px solid var(--steel-soft);
+    color: var(--concrete-dark);
+  }
+
+  /* === Reveal animations === */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* === Responsive === */
+  @media (max-width: 900px) {
+    .hero {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      padding-top: 7rem;
+    }
+    .hero-tag-bottom { position: static; margin-top: 3rem; flex-wrap: wrap; gap: 1rem; }
+    .section-head { grid-template-columns: 1fr; gap: 2rem; }
+    .post-item {
+      grid-template-columns: 50px 1fr 30px;
+      gap: 1rem;
+    }
+    .post-desc { grid-column: 1 / -1; padding-left: 60px; }
+    .post-cta { display: none; }
+    .project-grid {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+    }
+    .project:nth-child(1) { grid-row: auto; min-height: 350px; }
+    .project { min-height: 280px; }
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .footer-bottom { flex-direction: column; gap: 1rem; align-items: flex-start; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">
+    <span class="logo-mark"></span>
+    CHRISTIAN<span style="color: var(--rust);">/</span>ANDREW
+  </div>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#clients">Clients</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Contact →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div>
+    <div class="hero-meta">
+      <div>STUDIO OPEN · ACCEPTING COMMISSIONS</div>
+      <div>ARCHITECTURE · ENGINEERING · SCULPTURE · DESIGN</div>
+    </div>
+    <h1>
+      Designed,<br>
+      <span class="outlined">drafted</span><br>
+      <span class="accent">&amp; built</span><br>
+      to last.
+    </h1>
+  </div>
+  <div class="hero-side">
+    <p>
+      The official site of Christian Andrew Design — a multidisciplinary studio working across residential, commercial, and industrial architecture, monuments, sculpture, Art‑O‑Mat editions, and graphic design.
+    </p>
+    <div class="hero-disciplines">
+      <div class="discipline-tag">
+        <div class="discipline-tag-name">Architecture<br>&amp; Engineering</div>
+        <div class="discipline-tag-label">Residential ·<br>Commercial · Industrial</div>
+      </div>
+      <div class="discipline-tag">
+        <div class="discipline-tag-name">Monuments<br>&amp; Sculpture</div>
+        <div class="discipline-tag-label">Public Works ·<br>Studio Pieces</div>
+      </div>
+      <div class="discipline-tag">
+        <div class="discipline-tag-name">Art‑O‑Mat<br>Editions</div>
+        <div class="discipline-tag-label">Modern House<br>In A Box</div>
+      </div>
+      <div class="discipline-tag">
+        <div class="discipline-tag-name">Graphic<br>Design</div>
+        <div class="discipline-tag-label">Identity ·<br>Print · Exhibition</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-tag-bottom">
+    <div>[ DESIGNED · DRAFTED · BUILT ]</div>
+    <div class="scroll-indicator">SCROLL <span></span></div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="marquee-track">
+    <span>ARCHITECTURE<div class="marquee-dot"></div>ENGINEERING<div class="marquee-dot"></div>MONUMENTS<div class="marquee-dot"></div>SCULPTURE<div class="marquee-dot"></div>ART‑O‑MAT<div class="marquee-dot"></div>GRAPHIC DESIGN<div class="marquee-dot"></div></span>
+    <span>ARCHITECTURE<div class="marquee-dot"></div>ENGINEERING<div class="marquee-dot"></div>MONUMENTS<div class="marquee-dot"></div>SCULPTURE<div class="marquee-dot"></div>ART‑O‑MAT<div class="marquee-dot"></div>GRAPHIC DESIGN<div class="marquee-dot"></div></span>
+  </div>
+</div>
+
+<!-- LATEST POSTS -->
+<section class="services reveal">
+  <div class="section-head">
+    <div>
+      <div class="section-num">01 — From The Studio</div>
+      <h2>Latest<br><em>work.</em></h2>
+    </div>
+    <p class="section-intro">
+      Recent posts and project updates from the studio. The full Projects section is under active reconstruction — check back regularly as more works are added across architecture, sculpture, monuments, and graphic design.
+    </p>
+  </div>
+
+  <div class="post-list">
+    <a href="#" class="post-item">
+      <div class="post-num">/01</div>
+      <div class="post-title">Orlando Monument<br>Moved to Beach Line<br>&amp; Semoran at MCO</div>
+      <div class="post-desc">Relocation and reinstallation of a public monument at the Beach Line and Semoran Boulevard interchange near Orlando International Airport.</div>
+      <div class="post-cta">Continue Reading →</div>
+    </a>
+    <a href="#" class="post-item">
+      <div class="post-num">/02</div>
+      <div class="post-title">Modern House<br>In A Box —<br>Out Now</div>
+      <div class="post-desc">A new Art‑O‑Mat vendable edition — miniature modern architecture packaged for the retrofitted vintage cigarette machine network.</div>
+      <div class="post-cta">Continue Reading →</div>
+    </a>
+    <a href="#" class="post-item">
+      <div class="post-num">/03</div>
+      <div class="post-title">Off‑Grid Modular<br>Tree House Design<br>&amp; Construction</div>
+      <div class="post-desc">A modular, self‑sufficient tree house built off the grid — from initial design through structural detailing and final construction.</div>
+      <div class="post-cta">Continue Reading →</div>
+    </a>
+  </div>
+</section>
+
+<!-- PROJECT CATEGORIES -->
+<section class="projects reveal" id="projects">
+  <div class="section-head">
+    <div>
+      <div class="section-num" style="color: var(--safety);">02 — Project Archive</div>
+      <h2>The full<br><em>catalogue.</em></h2>
+    </div>
+    <p class="section-intro">
+      A growing archive across every discipline the studio touches — built work and commissions, public and private, large and small. New pieces are being added regularly as the Projects section is rebuilt.
+    </p>
+  </div>
+
+  <div class="project-grid">
+    <a href="#" class="project">
+      <div class="project-tag">FEATURED</div>
+      <div class="project-meta">
+        <span>Category 01</span>
+        <span>Built Work</span>
+      </div>
+      <div>
+        <div class="project-title">Architecture<br>&amp; Engineering</div>
+        <div class="project-sub">— Residential · Commercial · Industrial</div>
+      </div>
+    </a>
+    <a href="#" class="project">
+      <div class="project-meta">
+        <span>Category 02</span>
+        <span>Public Works</span>
+      </div>
+      <div>
+        <div class="project-title">Monuments</div>
+        <div class="project-sub">— Public &amp; Commemorative</div>
+      </div>
+    </a>
+    <a href="#" class="project">
+      <div class="project-meta">
+        <span>Category 03</span>
+        <span>Studio</span>
+      </div>
+      <div>
+        <div class="project-title">Sculpture</div>
+        <div class="project-sub">— Commissioned &amp; Self‑Directed</div>
+      </div>
+    </a>
+    <a href="#" class="project">
+      <div class="project-meta">
+        <span>Category 04</span>
+        <span>Editions</span>
+      </div>
+      <div>
+        <div class="project-title">Art‑O‑Mat<br>House In A Box</div>
+        <div class="project-sub">— Vendable Art Pieces</div>
+      </div>
+    </a>
+    <a href="#" class="project">
+      <div class="project-meta">
+        <span>Category 05</span>
+        <span>Visual</span>
+      </div>
+      <div>
+        <div class="project-title">Graphic<br>Design</div>
+        <div class="project-sub">— Identity · Print · Exhibition</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-section reveal" id="about">
+  <div class="about-grid">
+    <div>
+      <div class="section-num">03 — About</div>
+      <h2>Welcome<br>to the<br><em>studio.</em></h2>
+    </div>
+    <div>
+      <div class="about-body">
+        <p>
+          Welcome to the official website for Christian Andrew Design. I am currently working on a little restructure of this old thing, so pardon the dust and check back regularly as I will be adding many of my various works to my new Projects section.
+        </p>
+        <p>
+          That archive will include my residential, commercial, and industrial architectural and engineering works, monuments, sculptures, Art‑O‑Mat retro vending machine Modern House in a Box vendable art pieces, graphic design works, and much more.
+        </p>
+        <p>
+          Thank you for your interest. Contact me for consultation — and potential employers can view my résumé below.
+        </p>
+      </div>
+      <div class="about-actions">
+        <a href="#contact" class="btn-primary">Contact Me →</a>
+        <a href="#" class="btn-secondary">View Résumé</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA / CONTACT -->
+<section class="cta-section reveal" id="contact">
+  <div class="cta-inner">
+    <div class="section-num">04 — Begin Here</div>
+    <h2>Have a project?<br><em>Let's talk.</em></h2>
+    <p>Whether it's a residential renovation, a commissioned sculpture, a monument installation, or an Art‑O‑Mat edition — send a note. Every inquiry receives a personal reply.</p>
+    <div class="cta-buttons">
+      <a href="#" class="btn-primary">Contact Me →</a>
+      <a href="#" class="btn-secondary">View Résumé</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo">
+        <span class="logo-mark"></span>
+        CHRISTIAN<span style="color: var(--rust);">/</span>ANDREW
+      </div>
+      <p>A multidisciplinary studio for architecture, engineering, monuments, sculpture, Art‑O‑Mat editions, and graphic design. Open for commissions and consultation.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navigate</h4>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#about">About</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Practice</h4>
+      <ul>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#clients">Clients</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Recent</h4>
+      <ul>
+        <li><a href="#">Orlando Monument</a></li>
+        <li><a href="#">Modern House In A Box</a></li>
+        <li><a href="#">Off‑Grid Tree House</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© 2026 CHRISTIAN ANDREW DESIGN · ALL RIGHTS RESERVED</div>
+    <div class="cert-badges">
+      <span class="cert-badge">ARCHITECTURE</span>
+      <span class="cert-badge">ENGINEERING</span>
+      <span class="cert-badge">SCULPTURE</span>
+      <span class="cert-badge">DESIGN</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
