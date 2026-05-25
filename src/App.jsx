@@ -5,6 +5,7 @@ import Marquee from './components/Marquee'
 import LatestWork from './components/LatestWork'
 import Projects from './components/Projects'
 import About from './components/About'
+import Calculator from './components/Calculator'
 import CTA from './components/CTA'
 import Footer from './components/Footer'
 
@@ -31,6 +32,7 @@ export default function App() {
       <LatestWork />
       <Projects />
       <About />
+      <Calculator />
       <CTA />
       <Footer />
     </>
